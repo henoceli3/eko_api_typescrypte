@@ -1,5 +1,6 @@
 import bip39 from "bip39";
-import { Wallet } from "ethers";
+import { Wallet} from "ethers";
+import { v4 as uuidv4 } from "uuid";
 import dotenv from "dotenv";
 import { nanoid } from "nanoid";
 import { matchedData } from "express-validator";
@@ -53,7 +54,7 @@ class WalletGenerator {
     ethereumPrivateKey: string;
     ethereumAddress: string;
   }> {
-    const uniqueId = nanoid(9);
+    const uniqueId = uuidv4();
     const ethereumWallet = this.generateEthereumWallet(mnemonic);
     const bitcoinWallet = this.generateBitcoinWallet(mnemonic);
     return {

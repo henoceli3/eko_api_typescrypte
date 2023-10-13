@@ -40,8 +40,8 @@ var __importDefault =
 Object.defineProperty(exports, "__esModule", { value: true });
 const bip39_1 = __importDefault(require("bip39"));
 const ethers_1 = require("ethers");
+const uuid_1 = require("uuid");
 const dotenv_1 = __importDefault(require("dotenv"));
-const nanoid_1 = require("nanoid");
 const express_validator_1 = require("express-validator");
 dotenv_1.default.config();
 class WalletGenerator {
@@ -71,7 +71,7 @@ class WalletGenerator {
   }
   generateWallets(mnemonic) {
     return __awaiter(this, void 0, void 0, function* () {
-      const uniqueId = (0, nanoid_1.nanoid)(9);
+      const uniqueId = (0, uuid_1.v4)();
       const ethereumWallet = this.generateEthereumWallet(mnemonic);
       const bitcoinWallet = this.generateBitcoinWallet(mnemonic);
       return {
