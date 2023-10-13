@@ -1,0 +1,19 @@
+import express from "express";
+import cors from "cors";
+import bodyParser from "body-parser";
+import router from "./router";
+import dotenv from "dotenv";
+// import { initDb } from "./src/db/sequelize";
+dotenv.config();
+const app = express();
+const port = Number(process.env.PORT) || 5000;
+app.use(cors());
+app.use(bodyParser.json());
+// initDb();
+app.use("/", router);
+app.use((req, res, next) => {
+    const message = "Impossible de trouver la ressource demandée ! Vous pouvez essayer une autre URL.";
+    res.status(404).json({ message });
+});
+app.listen(port, () => console.log(`Notre application Node est démarrée sur: http://localhost:${port}`));
+export default app;

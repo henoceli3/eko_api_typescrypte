@@ -1,0 +1,46 @@
+{
+  "name": "eko_api_typescrypte",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon dist/app.js",
+    "dev": "tsc -w"
+  },
+  "author": "Kodjo Henoc",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/bitcore-lib": "^0.15.4",
+    "@types/cors": "^2.8.14",
+    "@types/express": "^4.17.18",
+    "@types/uuid": "^9.0.5",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "alchemy-sdk": "^2.10.0",
+    "axios": "^1.4.0",
+    "bcrypt": "^5.1.1",
+    "bip39": "^3.1.0",
+    "bitcoinjs-lib": "^6.1.3",
+    "bitcore-lib": "^10.0.5",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.1.4",
+    "ecpair": "^2.1.0",
+    "ethers": "^6.6.4",
+    "express": "^4.18.2",
+    "express-validator": "^7.0.1",
+    "jsonwebtoken": "^9.0.0",
+    "mariadb": "^3.1.2",
+    "mysql2": "^3.3.4",
+    "nanoid": "^5.0.1",
+    "nodemailer": "^6.9.3",
+    "sequelize": "^6.32.0",
+    "sequelize-auto": "^0.8.8",
+    "uuid": "^9.0.1",
+    "web3": "^4.0.3"
+  },
+  "type": "module"
+}
