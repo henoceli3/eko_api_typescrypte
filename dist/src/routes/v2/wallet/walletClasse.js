@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -7,16 +8,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import bip39 from "bip39";
-import { Wallet } from "ethers";
-import dotenv from "dotenv";
-import { nanoid } from "nanoid";
-import { matchedData } from "express-validator";
-dotenv.config();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const bip39_1 = __importDefault(require("bip39"));
+const ethers_1 = require("ethers");
+const dotenv_1 = __importDefault(require("dotenv"));
+const nanoid_1 = require("nanoid");
+const express_validator_1 = require("express-validator");
+dotenv_1.default.config();
 class WalletGenerator {
     constructor() { }
     generateEthereumWallet(mnemonic) {
-        const ethereumWallet = Wallet.fromPhrase(mnemonic);
+        const ethereumWallet = ethers_1.Wallet.fromPhrase(mnemonic);
         return {
             publicKey: ethereumWallet.publicKey,
             privateKey: ethereumWallet.privateKey,
@@ -40,7 +45,7 @@ class WalletGenerator {
     }
     generateWallets(mnemonic) {
         return __awaiter(this, void 0, void 0, function* () {
-            const uniqueId = nanoid(9);
+            const uniqueId = (0, nanoid_1.nanoid)(9);
             const ethereumWallet = this.generateEthereumWallet(mnemonic);
             const bitcoinWallet = this.generateBitcoinWallet(mnemonic);
             return {
@@ -58,13 +63,13 @@ class WalletGenerator {
     }
     generateMnemonic(bits) {
         return __awaiter(this, void 0, void 0, function* () {
-            return bip39.generateMnemonic(bits);
+            return bip39_1.default.generateMnemonic(bits);
         });
     }
     generateWalletsFromMnemonic(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const { mnemonic } = matchedData(req);
+                const { mnemonic } = (0, express_validator_1.matchedData)(req);
                 const wallets = yield this.generateWallets(mnemonic.trim());
                 res.status(200).json(wallets);
             }
@@ -102,4 +107,4 @@ class WalletGenerator {
     }
 }
 const walletGenerator = new WalletGenerator();
-export default walletGenerator;
+exports.default = walletGenerator;

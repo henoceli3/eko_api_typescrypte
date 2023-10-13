@@ -1,4 +1,6 @@
-import { SequelizeAuto } from "sequelize-auto";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const sequelize_auto_1 = require("sequelize-auto");
 const option = {
     host: "localhost",
     dialect: "mysql",
@@ -9,5 +11,5 @@ const option = {
     singularize: false,
     useDefine: false,
 };
-const auto = new SequelizeAuto("eko", "root", "", option);
+const auto = new sequelize_auto_1.SequelizeAuto("eko", "root", "", option);
 auto.run();

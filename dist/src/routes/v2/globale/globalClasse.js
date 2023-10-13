@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -7,7 +8,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import axios from "axios";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const axios_1 = __importDefault(require("axios"));
 class Global {
     constructor() {
         this.CryptoCmparApiKey =
@@ -19,7 +24,7 @@ class Global {
                 const cryptosTable = req.body.cryptosTable;
                 const devise = req.body.devise;
                 const url = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${cryptosTable.join(",")}&tsyms=${devise}`;
-                const response = yield axios.get(url);
+                const response = yield axios_1.default.get(url);
                 const cryptoData = response.data;
                 // Extract detailed information about cryptocurrencies
                 const cryptoObjects = cryptosTable.map((cryptoSymbol) => {
@@ -62,7 +67,7 @@ class Global {
     getNews(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const response = yield axios.get("https://min-api.cryptocompare.com/data/v2/news/?lang=EN");
+                const response = yield axios_1.default.get("https://min-api.cryptocompare.com/data/v2/news/?lang=EN");
                 const newsBrt = response.data;
                 const news = newsBrt.Data.map((news) => ({
                     title: news.title,
@@ -85,7 +90,7 @@ class Global {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false";
-                const response = yield axios.get(url);
+                const response = yield axios_1.default.get(url);
                 const topList = response.data;
                 res.status(200).json(topList);
             }
@@ -111,4 +116,4 @@ class Global {
     }
 }
 const global = new Global();
-export default global;
+exports.default = global;

@@ -1,6 +1,5 @@
 import bip39 from "bip39";
 import { Wallet } from "ethers";
-import bitcore from "bitcore-lib";
 import dotenv from "dotenv";
 import { nanoid } from "nanoid";
 import { matchedData } from "express-validator";

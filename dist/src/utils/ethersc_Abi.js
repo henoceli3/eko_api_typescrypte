@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const abi = [
     {
         constant: true,
@@ -220,4 +222,4 @@ const abi = [
         type: "event",
     },
 ];
-export default abi;
+exports.default = abi;

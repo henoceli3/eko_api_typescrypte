@@ -1,4 +1,6 @@
-export default function (sequelize, dataTypes) {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+function default_1(sequelize, dataTypes) {
     return sequelize.define("utilisatueur", {
         id: {
             autoIncrement: true,
@@ -44,3 +46,4 @@ export default function (sequelize, dataTypes) {
         ],
     });
 }
+exports.default = default_1;

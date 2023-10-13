@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -7,19 +8,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { matchedData } from "express-validator";
-import { models } from "../../../db/sequelize";
-import bcrypt from "bcrypt";
-import { v4 as uuidv4 } from "uuid";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_validator_1 = require("express-validator");
+const sequelize_1 = require("../../../db/sequelize");
+const bcrypt_1 = __importDefault(require("bcrypt"));
+const uuid_1 = require("uuid");
 class Users {
     createUser(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const { nom, prenom, email } = matchedData(req);
-                let { mdp } = matchedData(req);
-                const hash = yield bcrypt.hash(mdp, 10);
-                const newUser = yield models.utilisatueur.create({
-                    uuid: uuidv4(),
+                const { nom, prenom, email } = (0, express_validator_1.matchedData)(req);
+                let { mdp } = (0, express_validator_1.matchedData)(req);
+                const hash = yield bcrypt_1.default.hash(mdp, 10);
+                const newUser = yield sequelize_1.models.utilisatueur.create({
+                    uuid: (0, uuid_1.v4)(),
                     nom: nom,
                     prenom: prenom,
                     email: email,
@@ -42,8 +47,8 @@ class Users {
     getUserById(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const { id } = matchedData(req);
-                const user = yield models.utilisatueur.findByPk(id);
+                const { id } = (0, express_validator_1.matchedData)(req);
+                const user = yield sequelize_1.models.utilisatueur.findByPk(id);
                 return res.status(200).json({
                     uuid: user === null || user === void 0 ? void 0 : user.uuid,
                     nom: user === null || user === void 0 ? void 0 : user.nom,
@@ -60,7 +65,7 @@ class Users {
     getAllUsers(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const users = yield models.utilisatueur.findAll();
+                const users = yield sequelize_1.models.utilisatueur.findAll();
                 return res.status(200).json(users);
             }
             catch (error) {
@@ -72,9 +77,9 @@ class Users {
     updateUserById(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const { id } = matchedData(req);
-                const { user } = matchedData(req);
-                const updatedUser = yield models.utilisatueur.update(user, {
+                const { id } = (0, express_validator_1.matchedData)(req);
+                const { user } = (0, express_validator_1.matchedData)(req);
+                const updatedUser = yield sequelize_1.models.utilisatueur.update(user, {
                     where: { id },
                 });
                 return res.status(200).json(updatedUser);
@@ -88,8 +93,8 @@ class Users {
     deleteUserById(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const { id } = matchedData(req);
-                const deletedUser = yield models.utilisatueur.destroy({
+                const { id } = (0, express_validator_1.matchedData)(req);
+                const deletedUser = yield sequelize_1.models.utilisatueur.destroy({
                     where: { id },
                 });
                 return res.status(200).json(deletedUser);
@@ -103,8 +108,8 @@ class Users {
     login(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const { mdp, email } = matchedData(req);
-                const user = yield models.utilisatueur.findOne({
+                const { mdp, email } = (0, express_validator_1.matchedData)(req);
+                const user = yield sequelize_1.models.utilisatueur.findOne({
                     where: { mdp, email },
                 });
                 return res.status(200).json(user);
@@ -114,4 +119,4 @@ class Users {
     }
 }
 const users = new Users();
-export default users;
+exports.default = users;
